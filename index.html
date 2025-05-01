@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <div class="main">
+        <h2 class="exp-tracker">Expense Tracker</h2>
+
+        <div class="balance">
+            <h4>YOUR BALANCE</h4>
+            <h1 class="js-balance"></h1>
+        </div>
+
+        <div class="body-main">
+            <div class="inc-exp">
+                <div class="income js-income">
+                    <h3>INCOME</h3>
+                    <h3 class="js-income-h3"></h3>
+                </div>
+            
+                <div class="expense">
+                    <h3>EXPENSE</h3>
+                    <h3 class="js-expense-h3"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="transaction">
+            <hr>
+            <h3>Add New Transaction</h3>
+            <form action="post">
+                <div class="entry">
+                    <p>Entry Type:</p>
+                    <select name="entry" id="enter">
+                        <option value="default">Select</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="name">
+                    <label for="text">Name:</label>
+                    <input type="text" name="text" id="text">
+                </div>
+                <div class="amount">
+                    <label for="money">Amount:</label>
+                    <input type="number" name="money" id="money" inputmode="numeric">
+                </div>
+                <div class="button">
+                    <input type="button" value="Add">
+                </div>
+            </form>
+        </div>
+
+        <div class="history">
+            <hr>
+            <h3>History</h3>
+            <div class="section js-history-element">
+                <!-- <div class="history-item income">
+                  <span>Money</span>
+                  <span>+600</span>
+                </div>
+                <div class="history-item expense">
+                  <span>Burger</span>
+                  <span>-40</span>
+                </div> -->
+            </div>
+          </div>          
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

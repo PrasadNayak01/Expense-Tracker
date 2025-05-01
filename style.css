@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    background-color: #eaf6ff;
+}
+
+.exp-tracker {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.balance {
+    /* border: 2px solid black; */
+    padding-left: 20vw;
+}
+
+.balance h4 {
+    margin-bottom: 2px;
+}
+
+.balance h1 {
+    margin-top: 0px;
+    font-size: 40px;
+}
+
+.body-main {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.inc-exp {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: white;
+    width: 50vw;
+}
+
+.income,
+.expense {
+    width: 48%;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    font-size: medium;
+}
+
+.expense {
+    border-right: none;
+}
+
+.income h3:nth-child(2) {
+    color: #28a745;
+}
+
+.expense h3:nth-child(2) {
+    color: #dc3545;
+}
+
+.transaction {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.transaction hr {
+    width: 70vw;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form label,
+form p {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.2s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+/* Hide number input scroll buttons in Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Add button */
+form .button input[type="button"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+form .button input[type="button"]:hover {
+    background-color: #218838;
+}
+
+.history {
+    text-align: center;
+}
+
+.history h3 {
+    margin-top: 20px;
+}
+
+.history hr {
+    width: 70vw;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.history-item {
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 5px solid transparent;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+
+.history-item.income {
+    border-right: 5px solid #28a745;
+    color: #28a745;
+}
+
+.history-item.expense {
+    border-right: 5px solid #dc3545;
+    color: #dc3545;
+}
