@@ -33,13 +33,12 @@ window.addEventListener('DOMContentLoaded', () => {
   // Handle form submission
   const form = document.querySelector('#transaction-form');
   form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent form from refreshing page
+    e.preventDefault();
     
     const entryValue = document.querySelector('#enter').value;
     const nameValue = document.querySelector('#text').value.trim();
     const amountValue = document.querySelector('#money').value;
 
-    // Validation
     if (!entryValue) {
       alert('Please select Entry Type');
       return;
@@ -55,20 +54,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const amount = parseFloat(amountValue);
     
-    // Add to history
     history.push({
       entry: entryValue,
       name: nameValue,
       amount: amount
     });
 
-    // Save to storage
     storage.set('transactionHistory', history);
-
-    // Update display
     updateHistory();
-
-    // Clear form
     form.reset();
   });
 });
@@ -101,14 +94,12 @@ function updateHistory() {
     }
   });
 
-  // Update DOM
   document.querySelector('.js-income-h3').innerHTML = `₹${incomeTab.toFixed(2)}`;
   document.querySelector('.js-expense-h3').innerHTML = `₹${expenseTab.toFixed(2)}`;
   document.querySelector('.js-balance').innerHTML = `₹${balanceTab.toFixed(2)}`;
   document.querySelector('.js-history-element').innerHTML = fullHistoryHtml || '<p style="color: #666; padding: 20px;">No transactions yet</p>';
 }
 
-// Helper function to escape HTML and prevent XSS
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
