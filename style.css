@@ -198,6 +198,7 @@ form .button button:active {
 .section {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     max-width: 600px;
     margin: 0 auto;
