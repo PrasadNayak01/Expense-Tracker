@@ -3,38 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
   <title>Expense Tracker</title>
 </head>
 <body>
-
   <div class="main">
     <h2 class="exp-tracker">Expense Tracker</h2>
-
     <div class="balance">
       <h4>YOUR BALANCE</h4>
-      <h1 class="js-balance"></h1>
+      <h1 class="js-balance">₹0.00</h1>
     </div>
-
     <div class="body-main">
       <div class="inc-exp">
         <div class="income js-income">
           <h3>INCOME</h3>
-          <h3 class="js-income-h3"></h3>
+          <h3 class="js-income-h3">₹0.00</h3>
         </div>
-
         <div class="expense">
           <h3>EXPENSE</h3>
-          <h3 class="js-expense-h3"></h3>
+          <h3 class="js-expense-h3">₹0.00</h3>
         </div>
       </div>
     </div>
-
     <div class="transaction">
       <hr>
       <h3>Add New Transaction</h3>
-
-      <form>
+      <form id="transaction-form">
         <div class="entry">
           <p>Entry Type:</p>
           <select id="enter" required>
@@ -43,30 +37,25 @@
             <option value="expense">Expense</option>
           </select>
         </div>
-
         <div class="name">
           <label>Name:</label>
           <input type="text" id="text" required>
         </div>
-
         <div class="amount">
           <label>Amount:</label>
-          <input type="number" id="money" required>
+          <input type="number" id="money" step="0.01" required>
         </div>
-
         <div class="button">
-          <button type="button" id="add-btn">Add</button>
+          <button type="submit" id="add-btn">Add</button>
         </div>
       </form>
     </div>
-
     <div class="history">
       <hr>
       <h3>History</h3>
       <div class="section js-history-element"></div>
     </div>
   </div>
-
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
