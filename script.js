@@ -1,44 +1,75 @@
 let history = [];
 
+// Safe localStorage wrapper with fallback
+const storage = {
+  get: function(key) {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : null;
+    } catch (e) {
+      console.warn('localStorage not available:', e);
+      return null;
+    }
+  },
+  set: function(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (e) {
+      console.warn('localStorage not available:', e);
+      return false;
+    }
+  }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-
-  const button = document.querySelector('#add-btn');
-
-  const savedHistory = localStorage.getItem('transactionHistory');
-  if (savedHistory) {
-    history = JSON.parse(savedHistory);
+  // Load saved history
+  const savedHistory = storage.get('transactionHistory');
+  if (savedHistory && Array.isArray(savedHistory)) {
+    history = savedHistory;
     updateHistory();
   }
 
-  button.addEventListener('click', () => {
-    let entryValue = document.querySelector('#enter').value;
-    let nameValue = document.querySelector('#text').value.trim();
-    let amountValue = document.querySelector('#money').value;
+  // Handle form submission
+  const form = document.querySelector('#transaction-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent form from refreshing page
+    
+    const entryValue = document.querySelector('#enter').value;
+    const nameValue = document.querySelector('#text').value.trim();
+    const amountValue = document.querySelector('#money').value;
 
+    // Validation
     if (!entryValue) {
-      alert('Select Entry Type');
+      alert('Please select Entry Type');
       return;
     }
-
-    if (!nameValue || !amountValue) {
-      alert('Please enter both name and amount');
+    if (!nameValue) {
+      alert('Please enter a name');
+      return;
+    }
+    if (!amountValue || parseFloat(amountValue) <= 0) {
+      alert('Please enter a valid amount');
       return;
     }
 
     const amount = parseFloat(amountValue);
-
+    
+    // Add to history
     history.push({
       entry: entryValue,
       name: nameValue,
       amount: amount
     });
 
-    localStorage.setItem('transactionHistory', JSON.stringify(history));
+    // Save to storage
+    storage.set('transactionHistory', history);
+
+    // Update display
     updateHistory();
 
-    document.querySelector('#enter').value = '';
-    document.querySelector('#text').value = '';
-    document.querySelector('#money').value = '';
+    // Clear form
+    form.reset();
   });
 });
 
@@ -50,28 +81,36 @@ function updateHistory() {
 
   history.forEach(element => {
     const amount = parseFloat(element.amount);
-
+    
     if (element.entry === 'income') {
       incomeTab += amount;
       balanceTab += amount;
       fullHistoryHtml += `
         <div class="history-item income">
-          <span>${element.name}</span>
+          <span>${escapeHtml(element.name)}</span>
           <span>+₹${amount.toFixed(2)}</span>
         </div>`;
-    } else {
+    } else if (element.entry === 'expense') {
       expenseTab += amount;
       balanceTab -= amount;
       fullHistoryHtml += `
         <div class="history-item expense">
-          <span>${element.name}</span>
+          <span>${escapeHtml(element.name)}</span>
           <span>-₹${amount.toFixed(2)}</span>
         </div>`;
     }
   });
 
+  // Update DOM
   document.querySelector('.js-income-h3').innerHTML = `₹${incomeTab.toFixed(2)}`;
   document.querySelector('.js-expense-h3').innerHTML = `₹${expenseTab.toFixed(2)}`;
   document.querySelector('.js-balance').innerHTML = `₹${balanceTab.toFixed(2)}`;
-  document.querySelector('.js-history-element').innerHTML = fullHistoryHtml;
+  document.querySelector('.js-history-element').innerHTML = fullHistoryHtml || '<p style="color: #666; padding: 20px;">No transactions yet</p>';
+}
+
+// Helper function to escape HTML and prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
