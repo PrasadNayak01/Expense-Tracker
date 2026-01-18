@@ -110,6 +110,15 @@ form select:focus {
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+form .button {
+    margin-top: 10px;
 }
 
 form .button button {
@@ -117,6 +126,7 @@ form .button button {
     color: #fff;
     padding: 12px;
     font-size: 16px;
+    font-weight: 500;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -126,6 +136,17 @@ form .button button {
 
 form .button button:hover {
     background-color: #218838;
+}
+
+form .button button:active {
+    transform: scale(0.98);
+}
+
+/* Ensure button is clickable */
+#add-btn {
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
 }
 
 .history {
@@ -165,5 +186,9 @@ form .button button:hover {
 @media (max-width: 480px) {
     .balance h1 {
         font-size: 30px;
+    }
+    
+    .main {
+        padding: 15px;
     }
 }
